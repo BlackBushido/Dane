@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Dane</string>
+    <string name="description">Usuń wszystkie dane</string>
 </resources>

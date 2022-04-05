@@ -26,4 +26,10 @@ public class PhoneRepository {
             mPhoneDao.deleteAll();
         });
     }
+
+    public void insert(Phone v) {
+        PhoneRoomDatabase.databaseWriterExecutor.execute(() -> {
+            mPhoneDao.insert(v);
+        });
+    }
 }

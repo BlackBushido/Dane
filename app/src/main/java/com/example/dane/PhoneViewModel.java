@@ -25,4 +25,8 @@ public class PhoneViewModel extends AndroidViewModel {
     public void deleteAll(){
         mRepository.deleteAll();
     }
+
+    public void insert(Phone v) {
+        mRepository.insert(v);
+    }
 }

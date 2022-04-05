@@ -43,8 +43,6 @@ public abstract class PhoneRoomDatabase extends RoomDatabase {
 
             databaseWriterExecutor.execute(() -> {
                 PhoneDao dao = INSTANCE.phoneDao();
-                Phone firstPhone = new Phone(null, "Samsung", "A32", "11", "www.samsung.com");
-                dao.insert(firstPhone);
             });
         }
     };

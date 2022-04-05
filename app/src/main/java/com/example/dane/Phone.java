@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 public class Phone {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "ID")
-    private long mIndex;
+    private Long mIndex;
 
     @NonNull
     private String mProducer;
@@ -24,54 +24,53 @@ public class Phone {
     private String mWeb;
 
     public Phone(Long mIndex, @NonNull String mProducer, @NonNull String mModel, @NonNull String mVersion, @NonNull String mWeb) {
-        this.mIndex = mIndex;
         this.mProducer = mProducer;
         this.mModel = mModel;
         this.mVersion = mVersion;
         this.mWeb = mWeb;
     }
 
-    public long getmIndex() {
+    public Long getMIndex() {
         return mIndex;
     }
 
-    public void setmIndex(long mIndex) {
+    public void setMIndex(Long mIndex) {
         this.mIndex = mIndex;
     }
 
     @NonNull
-    public String getmProducer() {
+    public String getMProducer() {
         return mProducer;
     }
 
-    public void setmProducer(@NonNull String mProducer) {
+    public void setMProducer(@NonNull String mProducer) {
         this.mProducer = mProducer;
     }
 
     @NonNull
-    public String getmModel() {
+    public String getMModel() {
         return mModel;
     }
 
-    public void setmModel(@NonNull String mModel) {
+    public void setMModel(@NonNull String mModel) {
         this.mModel = mModel;
     }
 
     @NonNull
-    public String getmVersion() {
+    public String getMVersion() {
         return mVersion;
     }
 
-    public void setmVersion(@NonNull String mVersion) {
+    public void setMVersion(@NonNull String mVersion) {
         this.mVersion = mVersion;
     }
 
     @NonNull
-    public String getmWeb() {
+    public String getMWeb() {
         return mWeb;
     }
 
-    public void setmWeb(@NonNull String mWeb) {
+    public void setMWeb(@NonNull String mWeb) {
         this.mWeb = mWeb;
     }
 }
