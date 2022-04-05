@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">Dane</string>
     <string name="description">Usuń wszystkie dane</string>
+    <string name="producent">Producent</string>
+    <string name="model">Model</string>
+    <string name="androidVersion">Wersja androida</string>
+    <string name="webSite">Strona internetowa</string>
+    <string name="fillField">Uzupełnij pole</string>
+    <string name="cancel">ANULUJ</string>
+    <string name="save">ZAPISZ</string>
+    <string name="website">Strona</string>
+    <string name="fab">FAB</string>
 </resources>

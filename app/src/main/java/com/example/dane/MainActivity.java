@@ -1,14 +1,19 @@
 package com.example.dane;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
     private PhoneViewModel mPhoneViewModel;
     private PhoneListAdapter mAdapter;
+    private FloatingActionButton fab;
+    public static ActivityResultLauncher<Intent> mActivityLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +40,17 @@ public class MainActivity extends AppCompatActivity {
 
         insertData();
 
-        mPhoneViewModel.getAllPhones().observe(this, phones -> {
-            mAdapter.setPhoneList(phones);
-        });
+        mPhoneViewModel.getAllPhones().observe(this, phones -> mAdapter.setPhoneList(phones));
+
+        mActivityLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(), result -> {
+                    if(result.getResultCode() == RESULT_OK && result.getData() != null){
+                        Bundle bundle = result.getData().getExtras();
+                    }
+                }
+        );
+       fab = findViewById(R.id.fabMain);
+       fab.setOnClickListener(view -> mActivityLauncher.launch(new Intent(this, addPhoneActivity.class)));
     }
 
     private void insertData() {
