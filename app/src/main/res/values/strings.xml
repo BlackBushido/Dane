@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Dane</string>
     <string name="description">Usuń wszystkie dane</string>
     <string name="producent">Producent</string>
@@ -10,4 +10,8 @@
     <string name="save">ZAPISZ</string>
     <string name="website">Strona</string>
     <string name="fab">FAB</string>
+    <string name="added">Dodano telefon</string>
+    <string name="canceled">Anulowano</string>
+    <string name="invalidUrl" tools:ignore="Typos">Niepoprawny adres!</string>
+    <string name="emptyFields">Wypełnij wszystkie pola</string>
 </resources>

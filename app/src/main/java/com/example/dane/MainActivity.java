@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -38,19 +39,12 @@ public class MainActivity extends AppCompatActivity {
 
         mPhoneViewModel = new ViewModelProvider(this).get(PhoneViewModel.class);
 
-        insertData();
+        //insertData();
 
         mPhoneViewModel.getAllPhones().observe(this, phones -> mAdapter.setPhoneList(phones));
 
-        mActivityLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(), result -> {
-                    if(result.getResultCode() == RESULT_OK && result.getData() != null){
-                        Bundle bundle = result.getData().getExtras();
-                    }
-                }
-        );
-       fab = findViewById(R.id.fabMain);
-       fab.setOnClickListener(view -> mActivityLauncher.launch(new Intent(this, addPhoneActivity.class)));
+        serveAddPhone();
+
     }
 
     private void insertData() {
@@ -86,5 +80,32 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void serveAddPhone(){
+        mActivityLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(), result -> {
+                    if(result.getResultCode() == RESULT_OK && result.getData() != null){
+
+                        Bundle bundle = result.getData().getExtras();
+                        Phone phone = new Phone(
+                                null,
+                                bundle.getString(addPhoneActivity.PRODUCER_KEY),
+                                bundle.getString(addPhoneActivity.MODEL_KEY),
+                                bundle.getString(addPhoneActivity.ANDROID_VERSION_KEY),
+                                bundle.getString(addPhoneActivity.WEB_SITE_KEY)
+                        );
+
+                        mPhoneViewModel.insert(phone);
+                        Toast.makeText(getApplicationContext(), getString(R.string.added), Toast.LENGTH_SHORT).show();
+
+                    }
+                    else if(result.getResultCode() == RESULT_CANCELED){
+                        Toast.makeText(getApplicationContext(), getString(R.string.canceled), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        fab = findViewById(R.id.fabMain);
+        fab.setOnClickListener(view -> mActivityLauncher.launch(new Intent(this, addPhoneActivity.class)));
     }
 }
