@@ -32,4 +32,10 @@ public class PhoneRepository {
             mPhoneDao.insert(v);
         });
     }
+
+    public void update(Phone v) {
+        PhoneRoomDatabase.databaseWriterExecutor.execute(() -> {
+            mPhoneDao.update(v);
+        });
+    }
 }

@@ -14,4 +14,7 @@
     <string name="canceled">Anulowano</string>
     <string name="invalidUrl" tools:ignore="Typos">Niepoprawny adres!</string>
     <string name="emptyFields">Wypełnij wszystkie pola</string>
+    <string name="update">Zaktualizuj</string>
+    <string name="producer">Producent</string>
+    <string name="updated">Zaktualizowano</string>
 </resources>

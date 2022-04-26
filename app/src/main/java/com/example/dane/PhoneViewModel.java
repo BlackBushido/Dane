@@ -29,4 +29,9 @@ public class PhoneViewModel extends AndroidViewModel {
     public void insert(Phone v) {
         mRepository.insert(v);
     }
+
+    public void update(Phone v) {
+
+        mRepository.update(v);
+    }
 }

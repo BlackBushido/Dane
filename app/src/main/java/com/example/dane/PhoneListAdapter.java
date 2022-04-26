@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,25 +32,32 @@ public class PhoneListAdapter extends RecyclerView.Adapter<PhoneListAdapter.Phon
     @Override
     public void onBindViewHolder(@NonNull PhoneViewHolder holder, int position) {
 
-        Phone phone = mPhoneList.get(position);
-        holder.producer.setText(phone.getMProducer());
-        holder.model.setText(phone.getMModel());
-        //holder.phone = phone;
-//        holder.phoneRow.setOnClickListener(view -> {
-//            Context context = view.getContext();
-//            if (context instanceof MainActivity) {
-//                ((MainActivity) context).startUpdateActivity(phone);
-//            } else {
-//                System.out.println("PHONELISTADAPTER onBINDVIEWHOLER context error");
-//            }
-//        });
+        if(holder.getAdapterPosition() == 0){
+            holder.producer.setText(R.string.producer);
+            holder.model.setText(R.string.model);
+
+        }else{
+            Phone phone = mPhoneList.get(position - 1);
+            holder.producer.setText(phone.getMProducer());
+            holder.model.setText(phone.getMModel());
+            holder.phone = phone;
+
+            holder.phoneRow.setOnClickListener(view -> {
+                Context context = view.getContext();
+                if(context instanceof MainActivity){
+                    ((MainActivity) context).startUpdateActivity(phone);
+                }else{
+                    System.out.println("Error in OnBindViewHolder");
+                }
+            });
+        }
 
     }
 
     @Override
     public int getItemCount(){
         if(mPhoneList != null)
-            return mPhoneList.size();
+            return mPhoneList.size() + 1;
         return 0;
     }
 
@@ -59,13 +67,17 @@ public class PhoneListAdapter extends RecyclerView.Adapter<PhoneListAdapter.Phon
     }
 
     public class PhoneViewHolder extends RecyclerView.ViewHolder {
-        private final TextView producer;
-        private final TextView model;
+        LinearLayout phoneRow;
+        TextView producer;
+        TextView model;
+        Phone phone;
 
         public PhoneViewHolder(@NonNull View view) {
             super(view);
             producer = itemView.findViewById(R.id.producer);
             model = itemView.findViewById(R.id.model);
+            phoneRow = itemView.findViewById(R.id.phoneRow);
+            phone = null;
         }
 
     }

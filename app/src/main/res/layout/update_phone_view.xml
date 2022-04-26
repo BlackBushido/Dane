@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:shrinkColumns="*"
+    android:stretchColumns="2">
+
+    <TableRow
+        android:id="@+id/row1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/producer"
+            android:text="@string/producent">
+        </TextView>
+
+        <EditText
+            android:id="@+id/producerField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="2"
+            android:hint="@string/fillField"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textColorHint="#757575"
+            tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
+    </TableRow>
+    <TableRow
+        android:id="@+id/row2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/model"
+            android:text="@string/model">
+        </TextView>
+
+        <EditText
+            android:id="@+id/modelField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="2"
+            android:hint="@string/fillField"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textColorHint="#757575"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+    </TableRow>
+    <TableRow
+        android:id="@+id/row3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/androidVersion"
+            android:text="@string/androidVersion">
+        </TextView>
+
+        <EditText
+            android:id="@+id/androidVersionField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="2"
+            android:hint="@string/fillField"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textColorHint="#757575"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+    </TableRow>
+    <TableRow
+        android:id="@+id/row4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/webSite"
+            android:text="@string/webSite">
+        </TextView>
+
+        <EditText
+            android:id="@+id/webSiteField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_span="2"
+            android:hint="@string/fillField"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textColorHint="#757575"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/row5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <Button
+            android:id="@+id/cancelButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="#888999"
+            android:text="@string/cancel"
+            android:textColor="#000000" />
+
+        <Button
+            android:id="@+id/updateButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="#888999"
+            android:text="@string/update"
+            android:textColor="#000000" />
+
+        <Button
+            android:id="@+id/webSiteButton"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="#888999"
+            android:text="@string/website"
+            android:textColor="#000000" />
+    </TableRow>
+
+</TableLayout>

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String PHONE_KEY = "com.example.database.PHONE_KEY";
     private PhoneViewModel mPhoneViewModel;
     private PhoneListAdapter mAdapter;
     private FloatingActionButton fab;
@@ -103,9 +105,22 @@ public class MainActivity extends AppCompatActivity {
                     else if(result.getResultCode() == RESULT_CANCELED){
                         Toast.makeText(getApplicationContext(), getString(R.string.canceled), Toast.LENGTH_SHORT).show();
                     }
+                    else if (result.getResultCode() == RESULT_FIRST_USER + 1 && result.getData() != null){
+                        Bundle bundle = result.getData().getExtras();
+                        mPhoneViewModel.update(bundle.getParcelable(UpdatePhoneActivity.PHONE_OUT_KEY));
+                        Toast.makeText(getApplicationContext(), getString(R.string.updated), Toast.LENGTH_SHORT).show();
+                    }
                 }
         );
         fab = findViewById(R.id.fabMain);
         fab.setOnClickListener(view -> mActivityLauncher.launch(new Intent(this, addPhoneActivity.class)));
+    }
+
+    public void startUpdateActivity(Phone phone) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(PHONE_KEY, phone);
+        Intent intent = new Intent(this, UpdatePhoneActivity.class);
+        intent.putExtras(bundle);
+        mActivityLauncher.launch(intent);
     }
 }
