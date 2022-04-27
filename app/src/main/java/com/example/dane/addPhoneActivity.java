@@ -1,6 +1,7 @@
 package com.example.dane;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.webkit.URLUtil;
 import android.widget.Button;
@@ -59,6 +60,14 @@ public class addPhoneActivity extends AppCompatActivity {
                 }
             }else {
                 Toast.makeText(getApplicationContext(), getString(R.string.emptyFields), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        webSiteButton.setOnClickListener(view -> {
+            if(!URLUtil.isValidUrl(webSiteField.getText().toString())) {
+                Toast.makeText(getApplicationContext(), getString(R.string.invalidUrl), Toast.LENGTH_SHORT).show();
+            }else{
+                startActivity(new Intent("android.intent.action.VIEW", Uri.parse(webSiteField.getText().toString())));
             }
         });
     }

@@ -7,8 +7,8 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 public class PhoneRepository {
-    private PhoneDao mPhoneDao;
-    private LiveData<List<Phone>> mAllPhones;
+    private final PhoneDao mPhoneDao;
+    private final LiveData<List<Phone>> mAllPhones;
 
     PhoneRepository(Application application){
         PhoneRoomDatabase phoneRoomDatabase = PhoneRoomDatabase.getDatabase(application);
@@ -22,20 +22,18 @@ public class PhoneRepository {
     }
 
     void deleteAll(){
-        PhoneRoomDatabase.databaseWriterExecutor.execute(() -> {
-            mPhoneDao.deleteAll();
-        });
+        PhoneRoomDatabase.databaseWriterExecutor.execute(mPhoneDao::deleteAll);
     }
 
     public void insert(Phone v) {
-        PhoneRoomDatabase.databaseWriterExecutor.execute(() -> {
-            mPhoneDao.insert(v);
-        });
+        PhoneRoomDatabase.databaseWriterExecutor.execute(() -> mPhoneDao.insert(v));
     }
 
     public void update(Phone v) {
-        PhoneRoomDatabase.databaseWriterExecutor.execute(() -> {
-            mPhoneDao.update(v);
-        });
+        PhoneRoomDatabase.databaseWriterExecutor.execute(() -> mPhoneDao.update(v));
+    }
+
+    public void delete(Phone v) {
+        PhoneRoomDatabase.databaseWriterExecutor.execute(() -> mPhoneDao.delete(v));
     }
 }

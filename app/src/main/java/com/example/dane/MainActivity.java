@@ -5,6 +5,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,19 +34,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        mAdapter = new PhoneListAdapter(this);
-        recyclerView.setAdapter(mAdapter);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         mPhoneViewModel = new ViewModelProvider(this).get(PhoneViewModel.class);
 
-        //insertData();
+        insertData();
 
         mPhoneViewModel.getAllPhones().observe(this, phones -> mAdapter.setPhoneList(phones));
 
-        serveAddPhone();
+        servePhone();
 
     }
 
@@ -84,7 +79,16 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void serveAddPhone(){
+    private void servePhone(){
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        mAdapter = new PhoneListAdapter(this);
+        recyclerView.setAdapter(mAdapter);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
+
         mActivityLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(), result -> {
                     if(result.getResultCode() == RESULT_OK && result.getData() != null){
@@ -123,4 +127,16 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtras(bundle);
         mActivityLauncher.launch(intent);
     }
+
+    ItemTouchHelper.SimpleCallback simpleCallback =  new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            mPhoneViewModel.delete(((PhoneListAdapter.PhoneViewHolder)viewHolder).phone);
+        }
+    };
 }
